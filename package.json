@@ -1,0 +1,40 @@
+{
+  "name": "pair-wise-yf-57",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "taro build --type h5 --watch",
+    "build": "taro build --type h5",
+    "start": "taro build --type h5 --watch"
+  },
+  "dependencies": {
+    "@nutui/nutui-react-taro": "^3.0.17",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@tarojs/components": "3.6.40",
+    "@tarojs/helper": "3.6.40",
+    "@tarojs/plugin-framework-react": "3.6.40",
+    "@tarojs/plugin-platform-h5": "3.6.40",
+    "@tarojs/react": "3.6.40",
+    "@tarojs/runtime": "3.6.40",
+    "@tarojs/taro": "3.6.40",
+    "@hookform/resolvers": "^5.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.62.0",
+    "react-redux": "^9.2.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "@tarojs/cli": "3.6.40",
+    "@tarojs/webpack5-runner": "3.6.40",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "babel-preset-taro": "3.6.40",
+    "typescript": "^5.9.2",
+    "webpack": "5.91.0"
+  }
+}
