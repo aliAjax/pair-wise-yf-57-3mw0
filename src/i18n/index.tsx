@@ -1,6 +1,60 @@
 import { createContext, useContext, type ReactNode } from 'react';
 
-const messages = { title: '野外巡护离线调查', sync: '同步队列', review: '负责人复核', save: '保存现场记录' };
+const messages = {
+  title: '野外巡护离线调查',
+  subtitle: '弱网也能记录，联网后按条合并进站里；两边都改了会保留两版待协调，复核结论随改动自动失效。',
+  sync: '同步队列',
+  review: '负责人复核',
+  save: '保存现场记录',
+  recordPoint: '记录当前轨迹点',
+  pendingSync: '未同步完',
+  pendingCoord: '待协调',
+  pendingReview: '待复核',
+  points: '轨迹点',
+  samples: '样本',
+  observations: '观察记录',
+  pointOwner: '轨迹点归属',
+  noOwner: '未归属',
+  coordHint: '同一条观察两边都改了，已保留本地与站里两版，请选定以哪版为准；其余记录照常入库。',
+  keepLocal: '保留本地版本',
+  keepStation: '以站里版本为准',
+  localVersion: '本地版本',
+  stationVersion: '站里版本',
+  orphanPoints: '待重新归属的轨迹点',
+  orphanHint: '以站里版本为准后，这些点从观察上卸下，可就近重新归属。',
+  reattach: '重新归属',
+  reattachTo: '归属到',
+  syncNow: '恢复联网并同步',
+  retrySync: '重试继续同步',
+  weakNetwork: '模拟弱网（首次写入可能中断）',
+  simulateStation: '模拟站里修改',
+  syncing: '正在同步…',
+  syncDone: '本轮同步完成',
+  syncFailed: '同步中断',
+  syncIdle: '尚未同步',
+  syncProgress: '本轮进度',
+  syncRemaining: '剩余',
+  ledgerHint: '处理过的记录不会重复写入；中断后重试只补没做完的部分，重开应用也能接着。',
+  reviewPass: '复核通过',
+  reviewed: '已复核',
+  edit: '编辑',
+  editTitle: '修改观察记录',
+  noteLabel: '观察正文',
+  riskLabel: '风险等级',
+  reasonNew: '新记录待复核',
+  reasonInvalidated: '风险或正文已变更，原复核结论失效',
+  reasonPending: '待复核',
+  pointCount: '个轨迹点',
+  blockedHint: '观察待协调，轨迹点暂未入库',
+  highRisk: '高风险',
+  mediumRisk: '中风险',
+  lowRisk: '低风险',
+  syncFailedHint: '已处理的记录不会重复写入，点击重试只补没做完的部分。',
+  syncDoneHint: '剩余待协调、待复核请及时处理。'
+};
+
 const I18nContext = createContext(messages);
-export function I18nProvider({ children }: { children: ReactNode }) { return <I18nContext.Provider value={messages}>{children}</I18nContext.Provider>; }
+export function I18nProvider({ children }: { children: ReactNode }) {
+  return <I18nContext.Provider value={messages}>{children}</I18nContext.Provider>;
+}
 export const useI18n = () => useContext(I18nContext);
