@@ -7,10 +7,20 @@
 Taro 3 + React + TypeScript + NutUI + Redux Toolkit + RTK Query + React Hook Form + Zod + Taro 国际化方案。
 
 ## 已实现闭环
-- 观察记录、轨迹点、样本三类业务对象。
+- 观察记录、轨迹点、样本三类业务对象，轨迹点显式归属到所属观察。
 - 新建现场记录、记录 GPS 轨迹点、提交样本、负责人复核与样本核验。
-- 离线队列、模拟联网同步、记录级冲突选择本地或合并云端意见。
+- 回网后按条合并进站：
+  - 新观察与只在一边改过的记录照常入库，轨迹点随所属观察一起对上。
+  - 同一条观察两边同时修改：保留两版并列入“待协调”，其余记录不受影响；
+    协调时可选巡护员版（站里点仍挂该观察）或站里版（挂在本地观察下的点重新归属到站里版本并列出）。
+  - 观察风险等级或正文有改动，对应有效复核结论自动失效、退回待复核；没被改到的结论保留。
+- 同步逐条入库并立即落盘：失败重试只补没做完的部分，应用被回收重开后接着处理，已处理记录不重复写入。
+- 页面顶部实时显示待协调、待复核、没同步完三类条数。
 - Taro 本地存储持久化和移动端布局。
+
+## 同步引擎（src/store/sync.ts）
+纯函数 + Immer 的合并引擎，不依赖 Taro；版本号（localRev/stationRev）判定“只一边改”还是“两边同改”，
+复核结论带 basisNote/basisRisk 快照，正文或风险变化时失效。
 
 ## 启动
 ```bash
@@ -18,3 +28,7 @@ npm install
 npm run dev
 ```
 开发端口：62022
+
+> linux/arm64 环境注意：Taro 3.6.40 官方未发布 `@tarojs/binding` 的 arm64 gnu 二进制，
+> `npm install` 后需在 `node_modules/@tarojs/binding-linux-arm64-gnu` 放一个只导出
+> `Creator/create*` 枚举的 JS 桩（该绑定仅 `taro create` 脚手架使用，不影响 build/dev）。
